@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Progress Notes Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        .button-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+        .button { padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        .button:hover { background-color: #0056b3; }
+        #note { margin-top: 20px; width: 80%; height: 200px; padding: 10px; }
+        
+        /* Modal Styles */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 300px; text-align: left; }
+        .close-btn { background-color: #d9534f; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        .close-btn:hover { background-color: #c9302c; }
+    </style>
+</head>
+<body>
+    <h2>Dental Progress Notes Generator</h2>
+
+    <!-- Procedure Buttons Container -->
+    <div class="button-container">
+        <button class="button" onclick="openModal('fillingModal')">Filling</button>
+        <button class="button" onclick="openModal('crownPrepModal')">Crown Prep</button>
+        <button class="button" onclick="openModal('crownDeliveryModal')">Crown Delivery</button>
+        <button class="button" onclick="openModal('extractionModal')">Extraction</button>
+        <button class="button" onclick="openModal('extractionBGModal')">Extraction and Bone Graft</button>
+        <button class="button" onclick="openModal('implantPlacementModal')">Implant Placement (Immediate)</button>
+        <button class="button" onclick="openModal('implantCrownImpressionModal')">Implant Crown Impression</button>
+        <button class="button" onclick="openModal('implantCrownDeliveryModal')">Implant Crown Delivery</button>
+        <button class="button" onclick="openModal('implantConsultModal')">Implant Consult </button>
+        <button class="button" onclick="openModal('secondStageSurgeryModal')">Second Starge Surgery</button>
+        <button class="button" onclick="openModal('LOEmodal')">LOE</button>
+        <button class="button" onclick="openModal('sutureRemovalModal')">Suture Removal</button>
+        <button class="button" onclick="openModal('RCTModal')">RCT</button>
+        <button class="button" onclick="openModal('OrthoCheckModal')">Ortho Check</button>
+    </div>
+
+    <!-- Filling Modal -->
+<div class="modal" id="fillingModal">
+    <div class="modal-content">
+        <h3>Select Details for Filling</h3>
+        <div class="form-group">
+            <label for="fillingAssistantDropdown">Select Assistant:</label>
+            <select id="fillingAssistantDropdown">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fillingBloodPressure">Blood Pressure:</label>
+            <input type="text" id="fillingBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fillingTeethNumber">Teeth Number and Surface:</label>
+            <input type="text" id="fillingTeethNumber" placeholder="e.g., #30, occlusal">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fillingAnesthetic">Local Anesthetic:</label>
+            <select id="fillingAnesthetic">
+                <option value="4% Septocaine">4% Septocaine</option>
+                <option value="2% Lidocaine">2% Lidocaine</option>
+                <option value="3% Mepivacaine">3% Mepivacaine</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fillingCarpules">Number of Carpules:</label>
+            <input type="text" id="fillingCarpules" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fillingCaries">Extensive Caries:</label>
+            <select id="fillingCaries">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <br>
+        <button class="button" onclick="confirmProcedure('Filling', 'fillingModal')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('fillingModal')">Cancel</button>
+    </div>
+</div>
+
+    
+
+<!-- Crown Prep Modal -->
+<div class="modal" id="crownPrepModal">
+    <div class="modal-content">
+        <h3>Select Details for Crown Prep</h3>
+        <div class="form-group">
+            <label for="crownPrepAssistant">Select Assistant:</label>
+            <select id="crownPrepAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepBloodPressure">Blood Pressure:</label>
+            <input type="text" id="crownPrepBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepTooth">Teeth Number and Surface:</label>
+            <input type="text" id="crownPrepTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepNumb">Local Anesthetic:</label>
+            <select id="crownPrepNumb">
+                <option value="4% Septocaine HCl with 1:100k epinephrine">4% Septocaine HCl with 1:100k epinephrine</option>
+                <option value="2% Lidocaine HCl with 1:100k epinephrine">2% Lidocaine HCl with 1:100k epinephrine</option>
+                <option value="3% Mepivacaine with NO EPI">3% Mepivacaine with NO EPI</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepCarpules">Number of Carpules:</label>
+            <input type="text" id="crownPrepCarpules" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepShade">Shade:</label>
+            <input type = "text" id="crownPrepShade" placeholder="e.g., A2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepBuildup">Core Build-up Placed?:</label>
+            <select id="crownPrepBuildup">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownPrepLab">Lab:</label>
+            <select id="crownPrepLab">
+                <option value="Bruxzir Express">Bruxzir Express</option>
+                <option value="Glidewell">Glidewell</option>
+                <option value="Delux">Delux</option>
+                <option value="Mr.Crown">Mr.Crown</option>
+            </select>
+        </div>
+        <br>
+        <button class="button" onclick="confirmProcedure('Crown Prep')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('crownPrepModal')">Cancel</button>
+    </div>
+</div>
+
+
+<!-- Crown Delivery Modal -->
+<div class="modal" id="crownDeliveryModal">
+    <div class="modal-content">
+        <h3>Select Details for Crown Delivery</h3>
+        <div class="form-group">
+            <label for="crownDeliveryAssistant">Select Assistant:</label>
+            <select id="crownDeliveryAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownDeliveryBP">Blood Pressure:</label>
+            <input type="text" id="crownDeliveryBP" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownDeliveryTooth">Teeth Number:</label>
+            <input type="text" id="crownDeliveryTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crownDeliveryCrownType">Type of Crown:</label>
+            <select id="crownDeliveryCrownType">
+                <option value="Zirconia">Zirconia</option>
+                <option value="Zirconia Esthetic">Zirconia Esthetic</option>
+                <option value="E.max">E.max</option>
+                <option value="Gold/Precious Metal">Gold/Precious Metal</option>
+            </select>
+        </div>
+
+        <br>
+        <button class="button" onclick="confirmProcedure('Crown Delivery')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('crownDeliveryModal')">Cancel</button>
+    </div>
+</div>
+
+
+<!-- Extraction Modal -->
+<div class="modal" id="extractionModal">
+    <div class="modal-content">
+        <h3>Select Details for Crown Prep</h3>
+        <div class="form-group">
+            <label for="extractionAssistant">Select Assistant:</label>
+            <select id="extractionAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBloodPressure">Blood Pressure:</label>
+            <input type="text" id="extractionBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionTooth">Teeth Number and Surface:</label>
+            <input type="text" id="extractionTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionNumb">Local Anesthetic:</label>
+            <select id="extractionNumb">
+                <option value="4% Septocaine HCl with 1:100k epinephrine">4% Septocaine HCl with 1:100k epinephrine</option>
+                <option value="2% Lidocaine HCl with 1:100k epinephrine">2% Lidocaine HCl with 1:100k epinephrine</option>
+                <option value="3% Mepivacaine with NO EPI">3% Mepivacaine with NO EPI</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionCarpules">Number of Carpules:</label>
+            <input type="text" id="extractionCarpules" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionType">Type of Extraction:</label>
+            <select id="extractionType">
+                <option value="Simple">Simple</option>
+                <option value="Surgical">Surgical</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionSuture">Suture used:</label>
+            <select id="extractionSuture">
+                <option value="Simple">Chromic</option>
+                <option value="Surgical">PTFE</option>
+                <option value="Nylon">Nylon</option>
+                <option value="Vicryl">Vicryl</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Extraction')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('extractionModal')">Cancel</button>
+    </div>
+</div>
+
+<!-- Extraction and Bone Graft Modal -->
+<div class="modal" id="extractionBGModal">
+    <div class="modal-content">
+        <h3>Select Details for Extraction and Bone Graft</h3>
+        <div class="form-group">
+            <label for="extractionBGAssistant">Select Assistant:</label>
+            <select id="extractionBGAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBGBloodPressure">Blood Pressure:</label>
+            <input type="text" id="extractionBGBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBGTooth">Teeth Number and Surface:</label>
+            <input type="text" id="extractionBGTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBGNumb">Local Anesthetic:</label>
+            <select id="extractionBGNumb">
+                <option value="4% Septocaine HCl with 1:100k epinephrine">4% Septocaine HCl with 1:100k epinephrine</option>
+                <option value="2% Lidocaine HCl with 1:100k epinephrine">2% Lidocaine HCl with 1:100k epinephrine</option>
+                <option value="3% Mepivacaine with NO EPI">3% Mepivacaine with NO EPI</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBGCarpules">Number of Carpules:</label>
+            <input type="text" id="extractionBGCarpules" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBGType">Type of Extraction:</label>
+            <select id="extractionBGType">
+                <option value="Simple">Simple</option>
+                <option value="Surgical">Surgical</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBGSuture">Suture used:</label>
+            <select id="extractionBGSuture">
+                <option value="Simple">Chromic</option>
+                <option value="Surgical">PTFE</option>
+                <option value="Nylon">Nylon</option>
+                <option value="Vicryl">Vicryl</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="extractionBoneGraft">Bone Graft used:</label>
+            <select id="extractionBoneGraft">
+                <option value="alloOss® 50/50 Cortico/Cancellous Particulate 250-1000um">AlloOss Allograft</option>
+                <option value="NuOss Straight Bone Plug Bovine 10 mm x 20 mm">NuOss Bovine Bone Plug</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Extraction and Bone Graft')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('extractionBGModal')">Cancel</button>
+    </div>
+</div>
+
+<!-- Implant Placement Modal -->
+<div class="modal" id="implantPlacementModal">
+    <div class="modal-content">
+        <h3>Select Details for Implant Placement</h3>
+        <div class="form-group">
+            <label for="implantPlacementAssistant">Select Assistant:</label>
+            <select id="implantPlacementAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementBloodPressure">Blood Pressure:</label>
+            <input type="text" id="implantPlacementBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementTooth">Teeth Number and Surface:</label>
+            <input type="text" id="implantPlacementTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementNumb">Local Anesthetic:</label>
+            <select id="implantPlacementNumb">
+                <option value="4% Septocaine HCl with 1:100k epinephrine">4% Septocaine HCl with 1:100k epinephrine</option>
+                <option value="2% Lidocaine HCl with 1:100k epinephrine">2% Lidocaine HCl with 1:100k epinephrine</option>
+                <option value="3% Mepivacaine with NO EPI">3% Mepivacaine with NO EPI</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementCarpules">Number of Carpules:</label>
+            <input type="text" id="implantPlacementCarpules" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementType">Type of Extraction:</label>
+            <select id="implantPlacementType">
+                <option value="BioHorizons Tapered Pro">BioHorizons</option>
+                <option value="Glidewell HT">Glidewell HT</option>
+                <option value="Implant Direct Simply Iconic">Implant Direct</option>
+                <option value="Zimmer">Zimmer</option>
+                <option value="Bicon">Bicon</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementSize">Size of Implant used:</label>
+            <input type="text" id="implantPlacementSize" placeholder="e.g 5.2x9">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementTorque">Implant torque:</label>
+            <input type="text" id="implantPlacementTorque" placeholder="e.g 40">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementGuide">Surgical Guide used?:</label>
+            <select id="implantPlacementGuide">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantPlacementAbutment">Healing abutment/cover screw?:</label>
+            <select id="implantPlacementAbutment">
+                <option value="Healing Abutment">Healing Abutment</option>
+                <option value="Cover Screw">Cover Screw</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Implant Placement')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('implantPlacementModal')">Cancel</button>
+    </div>
+</div>
+
+
+<!-- Implant Crown Impression Modal -->
+<div class="modal" id="implantCrownImpressionModal">
+    <div class="modal-content">
+        <h3>Select Details for __</h3>
+        <div class="form-group">
+            <label for="implantCrownImpAssistant">Select Assistant:</label>
+            <select id="implantCrownImpAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpBloodPressure">Blood Pressure:</label>
+            <input type="text" id="implantCrownImpBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpTooth">Teeth Number and Surface:</label>
+            <input type="text" id="implantCrownImpTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpType">Implant System:</label>
+            <select id="implantCrownImpType">
+                <option value="BioHorizons Tapered Pro">BioHorizons</option>
+                <option value="Glidewell HT">Glidewell HT</option>
+                <option value="Implant Direct Simply Iconic">Implant Direct</option>
+                <option value="Zimmer">Zimmer</option>
+                <option value="Bicon">Bicon</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpScanbody">Scanbody used:</label>
+            <select id="implantCrownImpScanbody">
+                <option value="TruAbutment 3.5mmD">TruAbutment 3.5mmD</option>
+                <option value="TruAbutment 4.5mmD">TruAbutment 4.5mmD</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpShade">Shade for Implant Crown:</label>
+            <input type="text" id="implantCrownImpShade" placeholder="e.g A2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpCrownType">Type of Implant Crown?:</label>
+            <select id="implantCrownImpCrownType">
+                <option value="Screwmentable, Custom abutment">Screwmentable, Custom abutment</option>
+                <option value="Cementable">Cementable</option>
+                <option value="Screw-retained">Screw-retained</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="implantCrownImpLab">Lab?:</label>
+            <select id="implantCrownImpLab">
+                <option value="Mr.Crown">Mr.Crown</option>
+                <option value="Bruxzir Express">Bruxzir Express</option>
+                <option value="Glidewell">Glidewell</option>
+                <option value="Delux">Delux</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Implant Crown Impression')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('implantCrownImpressionModal')">Cancel</button>
+    </div>
+</div>
+
+
+
+<!-- Implant Crown Delivery Modal -->
+<div class="modal" id="implantCrownDeliveryModal">
+    <div class="modal-content">
+        <h3>Select Details for Implant Crown Delivery</h3>
+        <div class="form-group">
+            <label for="impCrownDelAssistant">Select Assistant:</label>
+            <select id="impCrownDelAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="impCrownDelBloodPressure">Blood Pressure:</label>
+            <input type="text" id="impCrownDelBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="impCrownDelTooth">Teeth Number and Surface:</label>
+            <input type="text" id="impCrownDelTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="impCrownDelImpCrownType">Type of Implant Crown?:</label>
+            <select id="impCrownDelImpCrownType">
+                <option value="Screwmentable, Custom abutment">Screwmentable, Custom abutment</option>
+                <option value="Cementable">Cementable</option>
+                <option value="Screw-retained">Screw-retained</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Implant Crown Delivery')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('implantCrownDeliveryModal')">Cancel</button>
+    </div>
+</div>
+
+
+<!-- Implant Consult Modal -->
+<div class="modal" id="implantConsultModal">
+    <div class="modal-content">
+        <h3>Select Details for Implant Crown Delivery</h3>
+        <div class="form-group">
+            <label for="impConsultAssistant">Select Assistant:</label>
+            <select id="impConsultAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="impConsultTooth">Teeth Number and Surface:</label>
+            <input type="text" id="impConsultTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Implant Consult')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('implantConsultModal')">Cancel</button>
+    </div>
+</div>
+ 
+
+<!-- Second Stage Surgery Modal -->
+<div class="modal" id="secondStageSurgeryModal">
+    <div class="modal-content">
+        <h3>Select Details for Second Stage Surgery</h3>
+        <div class="form-group">
+            <label for="secStageSurgAssistant">Select Assistant:</label>
+            <select id="secStageSurgAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="secStageSurgBloodPressure">Blood Pressure:</label>
+            <input type="text" id="secStageSurgBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="secStageSurgTooth">Teeth Number and Surface:</label>
+            <input type="text" id="secStageSurgTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="secStageSurgLocal">Local Anesthetic:</label>
+            <select id="secStageSurgLocal">
+                <option value="4% Septocaine HCl with 1:100k epinephrine">4% Septocaine HCl with 1:100k epinephrine</option>
+                <option value="2% Lidocaine HCl with 1:100k epinephrine">2% Lidocaine HCl with 1:100k epinephrine</option>
+                <option value="3% Mepivacaine with NO EPI">3% Mepivacaine with NO EPI</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="secStageSurgCarpule">Number of Carpules:</label>
+            <input type="text" id="secStageSurgCarpule" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="secStageSurgImpSystem">Implant System:</label>
+            <select id="secStageSurgImpSystem">
+                <option value="BioHorizons Tapered Pro">BioHorizons</option>
+                <option value="Glidewell HT">Glidewell HT</option>
+                <option value="Implant Direct Simply Iconic">Implant Direct</option>
+                <option value="Zimmer">Zimmer</option>
+                <option value="Bicon">Bicon</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Second Stage Surgery')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('secondStageSurgeryModal')">Cancel</button>
+    </div>
+</div>
+
+<!-- LOE Modal -->
+<div class="modal" id="LOEmodal">
+    <div class="modal-content">
+        <h3>Select Details for LOE</h3>
+        <div class="form-group">
+            <label for="LOEAssistant">Select Assistant:</label>
+            <select id="LOEAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="LOEBloodPressure">Blood Pressure:</label>
+            <input type="text" id="LOEBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="LOEcc">Chief Complain:</label>
+            <input type="text" id="LOEcc" placeholder="e.g., I have constant pain in lower right tooth">
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('LOE')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('LOEmodal')">Cancel</button>
+    </div>
+</div>
+
+
+<!-- Suture Removal Modal -->
+<div class="modal" id="sutureRemovalModal">
+    <div class="modal-content">
+        <h3>Select Details for Suture Removal</h3>
+        <div class="form-group">
+            <label for="sutureRemovalAssistant">Select Assistant:</label>
+            <select id="sutureRemovalAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Suture Removal')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('sutureRemovalModal')">Cancel</button>
+    </div>
+</div>
+
+
+<!-- RCT Modal -->
+<div class="modal" id="RCTModal">
+    <div class="modal-content">
+        <h3>Select Details for Endodontic Treatment</h3>
+        <div class="form-group">
+            <label for="RCTAssistant">Select Assistant:</label>
+            <select id="RCTAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTBloodPressure">Blood Pressure:</label>
+            <input type="text" id="RCTBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTTooth">Teeth Number:</label>
+            <input type="text" id="RCTTooth" placeholder="e.g., #30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTlocal">Local Anesthetic:</label>
+            <select id="RCTlocal">
+                <option value="4% Septocaine HCl with 1:100k epinephrine">4% Septocaine HCl with 1:100k epinephrine</option>
+                <option value="2% Lidocaine HCl with 1:100k epinephrine">2% Lidocaine HCl with 1:100k epinephrine</option>
+                <option value="3% Mepivacaine with NO EPI">3% Mepivacaine with NO EPI</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTcarpule">Number of Carpules:</label>
+            <input type="text" id="RCTcarpule" placeholder="e.g., 2">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTpulpal">Pulpal Diagnosis:</label>
+            <select id="RCTpulpal">
+                <option value="Reversible Pulpitis">Reversible Pulpitis</option>
+                <option value="Symptomatic Irreversible Pulpitis">Symptomatic Irreversible Pulpitis</option>
+                <option value="Asymptomatic Irreversible Pulpitis">Asymptomatic Irreversible Pulpitis</option>
+                <option value="Pulp Necrosis">Pulp Necrosis</option>
+                <option value="Previously Treated">Previously Treated</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTperiapical">Periapical Diagnosis:</label>
+            <select id="RCTperiapical">
+                <option value="Symptomatic Apical Periodontitis">Symptomatic Apical Periodontitis</option>
+                <option value="Asymptomatic Apical Periodontitis">Asymptomatic Apical Periodontitis</option>
+                <option value="Acute Apical Abscess">Acute Apical Abscess</option>
+                <option value="Chronic Apical Abscess">Chronic Apical Abscess</option>
+                <option value="Condensing Osteitis">Condensing Osteitis</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTsystem">RCT System:</label>
+            <select id="RCTsystem">
+                <option value="ProTaper Pro">ProTaper Pro</option>
+                <option value="WaveOne">WaveOne</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="RCTcanalLength">Canal Length:</label>
+            <input type="text" id="RCTcanalLength" placeholder="e.g., MB-22mm">
+        </div>
+
+        <br>
+        <button class="button" onclick="confirmProcedure('RCT')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('RCTModal')">Cancel</button>
+    </div>
+</div>
+
+<!-- Ortho Check Modal -->
+<div class="modal" id="OrthoCheckModal">
+    <div class="modal-content">
+        <h3>Select Details for Ortho Check</h3>
+        <div class="form-group">
+            <label for="orthoCheckAssistant">Select Assistant:</label>
+            <select id="orthoCheckAssistant">
+                <option value="Jennifer Oliveira-Grubb">Jennifer Oliveira-Grubb</option>
+                <option value="McKenna Stout">McKenna Stout</option>
+                <option value="Vanessa Roth">Vanessa Roth</option>
+                <option value="Darlene Daywalt">Darlene Daywalt</option>
+                <option value="Rhonda Graham">Rhonda Graham</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="orthoCheckBloodPressure">Blood Pressure:</label>
+            <input type="text" id="RCTBloodPressure" placeholder="e.g., 120/80">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="orthoCheckSystem">Aligner System:</label>
+            <select id="orthoCheckSystem">
+                <option value="Invisalign">Invisalign</option>
+                <option value="OrthoFX">OrthoFX</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="orthoCheckTrays">Trays deliveryed today:</label>
+            <input type="text" id="orthoCheckTrays" placeholder="e.g., #12,13,14,15">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="orthoCheckIPR">IPR?:</label>
+            <select id="orthoCheckIPR">
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </div>
+        <br>
+
+        <button class="button" onclick="confirmProcedure('Ortho Check')">Confirm</button>
+        <button class="close-btn" onclick="closeModal('OrthoCheckModal')">Cancel</button>
+    </div>
+</div>
+ 
+    
+<!-- Note Display -->
+<textarea id="note" readonly>Click a procedure to see the generated note here.</textarea>
+
+   <script>
+       // Open Modal
+       function openModal(modalId) {
+           document.getElementById(modalId).style.display = 'flex';
+       }
+
+       // Close Modal
+       function closeModal(modalId) {
+           document.getElementById(modalId).style.display = 'none';
+       }
+
+       // Confirm Procedure
+       function confirmProcedure(procedure) {
+           let note = '';
+           const today = new Date();
+           const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+           if (procedure === 'Filling') {
+               const assistant = document.getElementById('fillingAssistantDropdown').value;
+               const bp = document.getElementById('fillingBloodPressure').value;
+               const teeth = document.getElementById('fillingTeethNumber').value;
+               note = 
+               
+               `${formattedDate}
+
+
+Patient presented for composite restoration. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Necessary radiographs were prescribed by the dentist prior to treatment.
+
+Verbal and/or written consent provided by the patient prior to the procedure.
+
+Blood pressure: ${bp}
+Teeth and surface restored: ${teeth}
+Local anesthetic used: 4% Septocaine HCl with 1:100,000 epinephrine
+Number of carpules: 
+Shade of tooth: Omnichroma
+Extensive caries?: 
+
+Procedures:
+20% Benzocaine topical LA applied to injection site.  Local anesthesia was administered. Caries/existing restoration removed.  Appropriate matrix placed and wedged. Selective etch 37% H2PO4 on enamel, rinse, and blot dry. Bond applied and light-cured.  Condensed resin in light-cured increments. Finished with composite finishing burs, checked occlusion, verified contacts and polished. Post treatment instructions given. Patient tolerated procedure well. 
+
+Provider: Brian Kwon DMD
+EFDA/Assistant: ${assistant} `;
+               
+               closeModal('fillingModal');
+
+
+
+//// CROWN PREP
+
+           } else if (procedure === 'Crown Prep') {
+               const assistant = document.getElementById('crownPrepAssistant').value;
+               const teeth = document.getElementById('crownPrepTooth').value; 
+               const bp = document.getElementById('crownPrepBloodPressure').value;
+               const localanesthetic = document.getElementById('crownPrepNumb').value;
+               const carpule = document.getElementById('crownPrepCarpules').value;
+               const shade = document.getElementById('crownPrepShade').value;
+               const buildup = document.getElementById('crownPrepBuildup').value;
+               const lab = document.getElementById('crownPrepLab').value;
+
+               note = `${formattedDate}
+
+Patient presented for crown prep. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Verbal and written consent provided by the patient prior to the procedure.
+ 
+Teeth treated: ${teeth}
+Diagnosis: ${bp}
+Local anesthetic used: ${localanesthetic}
+Number of carpules: ${carpule}
+Shade of tooth: ${shade}
+Build up placed: ${buildup}
+Lab: Bruxzir Express ${lab}
+  
+Additional notes: 
+Adequate anesthesia achieved. Routine preparation. Tooth prepped and refined. Gingival retraction cord was placed. Digital impression obtained using Itero scanner for permanent restoration. Temporary crown fabricated and cemented. POI given. Patient tolerated the procedure well. Patient left satisfied and ambulatory. 
+
+Provider: Brian Kwon DMD
+EFDA/Assistant: ${assistant}        
+               
+                `;
+
+               closeModal('crownPrepModal');
+
+           }
+
+
+
+//// CROWN DELIVERY           
+
+        else if (procedure === 'Crown Delivery') {
+            const assistant = document.getElementById('crownDeliveryAssistant').value;
+            const teeth = document.getElementById('crownDeliveryTooth').value; 
+            const bp = document.getElementById('crownDeliveryBP').value;
+            const crowntype = document.getElementById('crownDeliveryCrownType').value;
+
+               note = `${formattedDate}
+
+Patient presented for crown delivery. Verbal and written consent provided by the patient prior to the procedure.
+ 
+Blood pressure: ${bp}
+Teeth: ${teeth}
+Crown type: ${crowntype}
+  
+Additional notes:
+Crown seated, margin checked, contacts checked. Intaglio surface of crown was cleaned with Ivoclean and Z-prime. Cemented crown with 3M™ RelyX™ Luting Plus Resin Modified Glass Ionomer Cement. Removed excess and margins checked. Flossed. Occlusion checked. Patient instructed not to chew on crown side for 1 hour after crown seat. Patient left satisfied and ambulatory.
+ 
+Provider: Dr. Brian Kwon 
+EFDA/Assistant: ${assistant} 
+               
+                `;
+                
+               closeModal('crownDeliveryModal');
+           }
+
+
+//// EXTRACTION
+
+else if (procedure === 'Extraction') {
+               const assistant = document.getElementById('extractionAssistant').value;
+               const teeth = document.getElementById('extractionTooth').value; 
+               const bp = document.getElementById('extractionBloodPressure').value;
+               const localanesthetic = document.getElementById('extractionNumb').value;
+               const carpule = document.getElementById('extractionCarpules').value;
+               const exttype = document.getElementById('extractionType').value;
+               const suture = document.getElementById('extractionSuture').value;
+
+               note = `${formattedDate}
+
+Patient presented for extraction. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Necessary radiographs were prescribed by the dentist prior to treatment.
+
+Verbal and written consent provided by the patient prior to the procedure.
+
+Blood pressure: ${bp}
+Teeth extracted: ${teeth}
+Local anesthetic used: ${localanesthetic}
+Number of carpules: ${carpule}
+Type of extraction: ${exttype}
+Type of sutures placed: ${suture}
+  
+Additional notes: Adequate anesthesia achieved. Soft tissue management, elevation and extraction with proper forceps. Hemostasis achieved. POI given written and orally. Patient tolerated procedure well and left in good condition.
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('extractionModal');
+           }
+
+
+//// EXTRACTION AND BONE GRAFT
+
+else if (procedure === 'Extraction and Bone Graft') {
+               const assistant = document.getElementById('extractionBGAssistant').value;
+               const teeth = document.getElementById('extractionBGTooth').value; 
+               const bp = document.getElementById('extractionBGBloodPressure').value;
+               const localanesthetic = document.getElementById('extractionBGNumb').value;
+               const carpule = document.getElementById('extractionBGCarpules').value;
+               const exttype = document.getElementById('extractionBGType').value;
+               const suture = document.getElementById('extractionBGSuture').value;
+               const bonegraft = document.getElementById('extractionBoneGraft').value;
+
+               note = `${formattedDate}
+
+Patient presented for extraction and bone graft. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Necessary radiographs were prescribed by the dentist prior to treatment.
+
+Verbal and written consent provided by the patient prior to the procedure.
+
+Blood pressure: ${bp}
+Teeth extracted: ${teeth}
+Local anesthetic used: ${localanesthetic}
+Number of carpules: ${carpule}
+Type of extraction: ${exttype}
+Type of sutures placed: ${suture}
+Bone graft used: ${bonegraft}
+  
+Additional notes: 
+Adequate anesthesia achieved. Soft tissue management, elevation and extraction with proper forceps. Hemostasis achieved. 0.5 cc of bone graft placed in the socket and dPTFE membrane used for retention. PTFE suture placed. POI given written and orally. Patient tolerated procedure well and left in good condition.
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('extractionBGModal');
+           }
+
+
+
+//// IMPLANT PLACEMENT
+
+else if (procedure === 'Implant Placement') {
+               const assistant = document.getElementById('implantPlacementAssistant').value;
+               const teeth = document.getElementById('implantPlacementTooth').value; 
+               const bp = document.getElementById('implantPlacementBloodPressure').value;
+               const localanesthetic = document.getElementById('implantPlacementNumb').value;
+               const carpule = document.getElementById('implantPlacementCarpules').value;
+               const impsystem = document.getElementById('implantPlacementType').value;
+               const impsize = document.getElementById('implantPlacementSize').value;
+               const imptorque = document.getElementById('implantPlacementTorque').value;
+               const surgicalguide = document.getElementById('implantPlacementGuide').value;
+               const abutment = document.getElementById('implantPlacementAbutment').value;
+               
+               note = `${formattedDate}
+
+Patient presented for implant placement surgery. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Necessary radiographs were prescribed by the dentist prior to treatment.
+
+Verbal and written consent provided by the patient prior to the procedure.
+
+Blood pressure: ${bp}
+Teeth to be replaced: ${teeth}
+Local anesthetic used: ${localanesthetic}
+Number of carpules: ${carpule}
+Implant system: ${impsystem}
+Size of implant placed: ${impsize}
+Torque: ${imptorque} N/cm3
+Surgical guide used: ${surgicalguide}
+  
+Additional notes:
+ 
+Patient rinsed with CHX for 30 seconds and pre-medicated with 1g amoxicillin prior to the procedure. Sulcular incision made and FTF raised. Tooth luxated and extracted atraumatically. Pilot drill used to create initial osteotomy. Par pin/drill placed and 1 PA obtained to verify angulation. Bone drills used to create appropriate osteotomy for implant. Copious saline solution used throughout the procedure. Implant placed with implant driver and torqued with wrench. ${abutment} placed. 0.5 cc alloOss® Natural Blend Mineralized Cortico/Cancellous Particulate 500-1000um placed around the implant. Retention achieved with dPTFE membrane and PTFE suture. 
+Post op instructions given to patient. Patient to use warm salt water initially and then start CHX rinse 48 hours after surgery. Final PA and CBCT obtained of implant placement. Patient will return for post op check in two weeks.
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('implantPlacementModal');
+           }
+
+
+//// IMPLANT CROWN IMPRESSION
+
+else if (procedure === 'Implant Crown Impression') {
+               const assistant = document.getElementById('implantCrownImpAssistant').value;
+               const teeth = document.getElementById('implantCrownImpTooth').value; 
+               const bp = document.getElementById('implantCrownImpBloodPressure').value;
+               const imptype = document.getElementById('implantCrownImpType').value;
+               const scanbody = document.getElementById('implantCrownImpScanbody').value;
+               const shade = document.getElementById('implantCrownImpShade').value;
+               const impcrowntype = document.getElementById('implantCrownImpCrownType').value;
+               const lab = document.getElementById('implantCrownImpLab').value;
+
+               note = `${formattedDate}
+
+Patient presented for implant crown impression. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Necessary radiographs were prescribed by the dentist prior to treatment.
+
+Verbal and written consent were provided by the patient prior to the procedure.
+
+Blood Pressure: ${bp}
+Tooth Number: ${teeth}
+Implant Type: ${imptype}
+Scan body: ${scanbody}
+Shade: ${shade}
+Type of implant crown: ${impcrowntype}
+Lab: ${lab}
+
+
+Additional notes: 
+
+Healing abutment was removed and scan body was placed. Digital impression obtained via iTero scanner. Healing abutment was placed back. Implant crown to be delivered next visit. 
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('implantCrownImpressionModal');
+           }
+
+
+//// IMPLANT CROWN DELIVERY
+
+else if (procedure === 'Implant Crown Delivery') {
+               const assistant = document.getElementById('impCrownDelAssistant').value;
+               const teeth = document.getElementById('impCrownDelTooth').value; 
+               const bp = document.getElementById('impCrownDelBloodPressure').value;
+               const impcrowntype = document.getElementById('impCrownDelImpCrownType').value;
+
+               
+               note = `${formattedDate}
+
+Patient presented for implant crown delivery. Verbal and written consent provided by the patient prior to the procedure.
+ 
+Blood Pressure: ${bp}
+Teeth: ${teeth}
+Crown type: ${impcrowntype}
+  
+Additional notes:
+Healing abutment removed and custom abutment was tried on. Margin and contact checked. 1 PA and IO photos obtained. Teflon tape packed in the screw access. Crown cemented to custom abutment with 3M™ RelyX™ Ultimate Adhesive Resin Cement and torqued to 30 N/cm3. Patient left satisfied and ambulatory.  
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}                      
+                `;
+               closeModal('implantCrownDeliveryModal');
+           }
+
+
+//// IMPLANT CONSULT
+
+else if (procedure === 'Implant Consult') {
+               const assistant = document.getElementById('impConsultAssistant').value;
+               const teeth = document.getElementById('impConsultTooth').value; 
+               
+               note = `${formattedDate}
+ 
+Patient presented for implant consultation for #${teeth}. Medical history reviewed. CBCT/diagnostic cast obtained. Discussed the process and answered all questions. 
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('implantConsultModal');
+           }
+
+
+
+//// SECOND STAGE SURGERY
+
+else if (procedure === 'Second Stage Surgery') {
+               const assistant = document.getElementById('secStageSurgAssistant').value;
+               const teeth = document.getElementById('secStageSurgTooth').value; 
+               const bp = document.getElementById('secStageSurgBloodPressure').value;
+               const localanesthetic = document.getElementById('secStageSurgLocal').value;
+               const carpule = document.getElementById('secStageSurgCarpule').value;
+               const impsystem = document.getElementById('secStageSurgImpSystem').value;
+               
+               note = `${formattedDate}
+
+Patient presented for second stage surgery for implant. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Blood pressure was recorded. Necessary radiographs were prescribed by the dentist prior to treatment.
+ 
+Verbal and written consent were provided by the patient prior to the procedure.
+ 
+Blood Pressure: ${bp}
+Tooth to be replaced: ${teeth}
+Local anesthetic used: ${localanesthetic}
+Number of carpules: ${carpule}
+Implant System: ${impsystem}
+ 
+Additional notes:
+ 
+Patient rinsed with CHX for 30 seconds. Minimal incision made with tissue punch bur. Overgrown bone around the implant removed and cover screw removed. Healing abutment placed. Impression to be obtained in 3 weeks. 
+ 
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('secondStageSurgeryModal');
+           }
+
+
+//// LOE
+
+else if (procedure === 'LOE') {
+               const assistant = document.getElementById('LOEAssistant').value;
+               const cc = document.getElementById('LOEcc').value; 
+               const bp = document.getElementById('LOEBloodPressure').value;
+
+               
+               note = `${formattedDate}
+
+Patient presented for LOE with cc: "${cc}" . Medical history was reviewed with the patient prior to dental treatment. ${bp} Any new findings were updated in the patient's medical chart.
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('LOEmodal');
+           }
+
+
+//// SUTURE REMOVAL
+
+else if (procedure === 'Suture Removal') {
+               const assistant = document.getElementById('sutureRemovalAssistant').value;
+               
+               note = `${formattedDate}
+
+Patient presented for post-op evaluation. Surgery site evaluated. Healing WNL. Site irrigated with CHX. Suture removed. 
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('sutureRemovalModal');
+           }
+
+
+
+//// RCT
+
+else if (procedure === 'RCT') {
+               const assistant = document.getElementById('RCTAssistant').value;
+               const teeth = document.getElementById('RCTTooth').value; 
+               const bp = document.getElementById('RCTBloodPressure').value;
+               const localanesthetic = document.getElementById('RCTlocal').value;
+               const carpule = document.getElementById('RCTcarpule').value;
+               const pulpal = document. getElementById('RCTpulpal').value;
+               const periapical = document.getElementById('RCTperiapical').value;
+               const RCTsystem = document.getElementById('RCTsystem').value;
+               const canallength = document.getElementById('RCTcanalLength').value;
+
+               note = `${formattedDate}
+                    
+Patient presented for endodontic treatment. Medical history was reviewed with the patient prior to dental treatment. Any new findings were updated in the patient's medical chart. Necessary radiographs were prescribed by the dentist prior to treatment.
+ 
+Verbal and written consent provided by the patient prior to the procedure.
+ 
+Blood pressure: ${bp}
+Teeth treated: ${teeth}
+Local anesthetic used: ${localanesthetic}
+Number of carpules: ${carpule}
+Pulpal diagnosis: ${pulpal}
+Periapical diagnosis: ${periapical}
+System: ${RCTsystem}
+Canal length and size: ${canallength}
+  
+Additional notes:
+Tooth isolated with rubber dam and liquid dam. Occlusal surface reduced for accurate WL measurement. Tooth accessed and WL measured with 10K file and apex locator. Canals cleaned and shaped with ${RCTsystem} NiTi rotary files. Canals irrigated copious NaOCl throughout the process. Canals activated with NaOCl and Endo Activator, and dried with paper points. Canals further treated with EDTA and disinfected with CHX. After thoroughly drying the canals with paper points, obturation completed with EndoSequence BC Sealer and ${RCTsystem} gutta percha. 3 PAs obtained. 
+ 
+Core build-up completed with white Premier CompCore. Crown prep completed and digital scan obtained with iTero scanner. Temporary crown cemented with TempBond. Patient was cooperative throughout the procedure.
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('RCTModal');
+           }
+
+
+//// ORTHO CHECK
+
+else if (procedure === 'Ortho Check') {
+               const assistant = document.getElementById('orthoCheckAssistant').value;
+               const orthosystem = document.getElementById('orthoCheckSystem').value; 
+               const bp = document.getElementById('orthoCheckBloodPressure').value;
+               const trays = document.getElementById('orthoCheckTrays').value;
+               const IPRyesno = document.getElementById('orthoCheckIPR').value;
+
+               
+               note = `${formattedDate}
+
+Patient presented for periodic orthodontic evaluation for ${orthosystem}. Medical history reviewed and updated. Orthodontic treatment progress checked. 
+
+Trays delivered today: ${trays}
+IPR?: ${IPRyesno}
+
+Provider: Dr. Brian Kwon
+EFDA/Assistant: ${assistant}       
+               
+                `;
+               closeModal('OrthoCheckModal');
+           }
+
+
+
+           // Display and Copy Note
+           const noteArea = document.getElementById('note');
+           noteArea.value = note;
+           noteArea.select();
+           document.execCommand('copy');
+           alert('Note generated and copied to clipboard!');
+       }
+   </script>
+</body>
+</html>
